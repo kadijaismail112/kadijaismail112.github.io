@@ -1,0 +1,39 @@
+{
+  "personal": {
+    "name": "Kadija Ismail",
+    "title": "Software Engineer, Educator, and Innovator",
+    "bio": "Stanford graduate passionate about creating impactful software solutions and mentoring the next generation of engineers.",
+    "email": "contact@example.com",
+    "location": "San Francisco Bay Area",
+    "social": {
+      "github": "https://github.com/username",
+      "linkedin": "https://linkedin.com/in/username"
+    }
+  },
+  "projects": [
+    {
+      "id": "odin-replicator",
+      "title": "Odin Replicator CLI",
+      "description": "A command-line tool for automated database replication and schema validation.",
+      "tags": ["TypeScript", "Node.js", "CLI"],
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
+      "github": "https://github.com/username/odin-replicator",
+      "live": "https://www.npmjs.com/package/odin-replicator"
+    }
+  ],
+  "skills": [
+    {
+      "category": "Languages",
+      "items": ["JavaScript", "TypeScript", "Python", "Java", "SQL"]
+    }
+  ],
+  "blog": [
+    {
+      "id": "getting-started-with-typescript",
+      "title": "Getting Started with TypeScript",
+      "date": "2024-03-15",
+      "preview": "Learn the basics of TypeScript and how it can improve your JavaScript development.",
+      "content": "Full blog post content here..."
+    }
+  ]
+}
