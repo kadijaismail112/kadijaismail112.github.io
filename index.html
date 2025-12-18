@@ -1,13 +1,721 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kadija Ismail — AI, Education & Impact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1a1a;
+            --paper: #faf9f7;
+            --accent: #c45d3a;
+            --accent-soft: #e8d5ce;
+            --muted: #6b6b6b;
+            --gold: #b8860b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.6;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 4rem 4rem 8rem;
+            position: relative;
+        }
+
+        .hero-left::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--ink), transparent);
+            opacity: 0.2;
+        }
+
+        .tagline {
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            animation: fadeSlideUp 1s ease-out 0.3s both;
+        }
+
+        h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            font-weight: 400;
+            line-height: 1.05;
+            margin-bottom: 2rem;
+            animation: fadeSlideUp 1s ease-out 0.5s both;
+        }
+
+        h1 span {
+            display: block;
+        }
+
+        h1 .accent {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .hero-intro {
+            font-size: 1.1rem;
+            color: var(--muted);
+            max-width: 420px;
+            animation: fadeSlideUp 1s ease-out 0.7s both;
+        }
+
+        .hero-right {
+            background: linear-gradient(135deg, var(--accent) 0%, #8b3a2a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-right::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+
+        .hero-graphic {
+            font-family: 'Instrument Serif', serif;
+            font-size: 20rem;
+            color: rgba(255,255,255,0.1);
+            position: absolute;
+            font-style: italic;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            animation: fadeSlideUp 1s ease-out 1s both;
+        }
+
+        .scroll-line {
+            width: 40px;
+            height: 1px;
+            background: var(--ink);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 8rem 8rem;
+        }
+
+        .section-header {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .section-number {
+            font-family: 'Instrument Serif', serif;
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .section-line {
+            height: 1px;
+            background: linear-gradient(to right, var(--ink), transparent);
+            opacity: 0.15;
+        }
+
+        h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 6rem;
+        }
+
+        .about-highlight {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.8rem;
+            line-height: 1.5;
+            color: var(--ink);
+        }
+
+        .about-highlight em {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .about-text {
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Work Section */
+        .work {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        .work .section-number {
+            color: var(--accent-soft);
+        }
+
+        .work .section-line {
+            background: linear-gradient(to right, var(--paper), transparent);
+        }
+
+        .work-grid {
+            display: grid;
+            gap: 4rem;
+        }
+
+        .work-item {
+            display: grid;
+            grid-template-columns: 200px 1fr auto;
+            gap: 3rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .work-item:hover {
+            padding-left: 2rem;
+            border-color: var(--accent);
+        }
+
+        .work-category {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-soft);
+        }
+
+        .work-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .work-desc {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+        }
+
+        .work-year {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.4);
+            font-style: italic;
+        }
+
+        /* Impact Section */
+        .impact {
+            background: linear-gradient(180deg, var(--paper) 0%, var(--accent-soft) 100%);
+        }
+
+        .impact-card {
+            background: white;
+            padding: 4rem;
+            border-radius: 2px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            max-width: 800px;
+            position: relative;
+        }
+
+        .impact-card::before {
+            content: '"';
+            font-family: 'Instrument Serif', serif;
+            font-size: 12rem;
+            color: var(--accent);
+            opacity: 0.1;
+            position: absolute;
+            top: -2rem;
+            left: 1rem;
+            line-height: 1;
+        }
+
+        .impact-quote {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.6rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .impact-source {
+            font-size: 0.85rem;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: white;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .skill-block {
+            padding: 2rem;
+            border: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+        }
+
+        .skill-block:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(196, 93, 58, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .skill-desc {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--ink);
+            color: var(--paper);
+            text-align: center;
+            padding: 10rem 4rem;
+        }
+
+        .contact h2 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            margin-bottom: 2rem;
+        }
+
+        .contact h2 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-link {
+            color: var(--paper);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            color: var(--accent-soft);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--ink);
+            color: rgba(255,255,255,0.4);
+            padding: 2rem 8rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-20px) rotate(-5deg); }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { transform: scaleX(1); opacity: 1; }
+            50% { transform: scaleX(1.5); opacity: 0.5; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            section {
+                padding: 5rem 4rem;
+            }
+            
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-left {
+                padding: 8rem 4rem 4rem;
+                min-height: 70vh;
+            }
+            
+            .hero-left::after {
+                display: none;
+            }
+            
+            .hero-right {
+                min-height: 40vh;
+            }
+            
+            .scroll-indicator {
+                left: 4rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .work-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .work-year {
+                order: -1;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                padding: 1.5rem 2rem;
+            }
+            
+            footer {
+                padding: 2rem 4rem;
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            section {
+                padding: 4rem 2rem;
+            }
+            
+            .hero-left {
+                padding: 7rem 2rem 3rem;
+            }
+            
+            .scroll-indicator {
+                left: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">KI</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-left">
+            <p class="tagline">Stanford · AI & Education</p>
+            <h1>
+                <span>Kadija</span>
+                <span class="accent">Ismail</span>
+            </h1>
+            <p class="hero-intro">Turning complex problems into simple, impactful solutions at the intersection of artificial intelligence and education.</p>
+            <div class="scroll-indicator">
+                <span class="scroll-line"></span>
+                <span>Scroll to explore</span>
+            </div>
+        </div>
+        <div class="hero-right">
+            <span class="hero-graphic">K</span>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="section-header">
+            <span class="section-number">01</span>
+            <div class="section-line"></div>
+        </div>
+        <div class="about-content">
+            <h2>Building bridges between <em>technology</em> and <em>social impact</em></h2>
+            <div class="about-text">
+                <p class="about-highlight">I believe that the most meaningful innovation happens when we combine <em>technical excellence</em> with a deep commitment to <em>equity and justice</em>.</p>
+                <p>Based in the Washington DC-Baltimore area with roots at Stanford University, I work at the intersection of AI and education—exploring how emerging technologies can create more equitable learning opportunities for all.</p>
+                <p>My journey from leading a historic school renaming campaign to working in management science has taught me that real change requires both vision and rigorous execution. Whether I'm developing AI applications or advocating for civil rights, I approach every challenge with the same belief: bold action, grounded in data, can transform systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="work" id="work">
+        <div class="section-header">
+            <span class="section-number">02</span>
+            <div class="section-line"></div>
+        </div>
+        <h2>Selected Experience</h2>
+        <div class="work-grid">
+            <div class="work-item">
+                <span class="work-category">Current Role</span>
+                <div>
+                    <h3 class="work-title">Stanford University</h3>
+                    <p class="work-desc">Management Science & Engineering Department — Researching applications of AI in educational systems and policy.</p>
+                </div>
+                <span class="work-year">Present</span>
+            </div>
+            <div class="work-item">
+                <span class="work-category">Education</span>
+                <div>
+                    <h3 class="work-title">Stanford University</h3>
+                    <p class="work-desc">Computer Science with focus on artificial intelligence and machine learning applications.</p>
+                </div>
+                <span class="work-year">2025</span>
+            </div>
+            <div class="work-item">
+                <span class="work-category">Leadership</span>
+                <div>
+                    <h3 class="work-title">John R. Lewis High School Renaming</h3>
+                    <p class="work-desc">Co-led the successful campaign to rename Robert E. Lee High School, honoring civil rights icon Rep. John Lewis.</p>
+                </div>
+                <span class="work-year">2020</span>
+            </div>
+            <div class="work-item">
+                <span class="work-category">Recognition</span>
+                <div>
+                    <h3 class="work-title">USC Bovard Scholar</h3>
+                    <p class="work-desc">Selected for prestigious program supporting high-achieving students from underrepresented backgrounds.</p>
+                </div>
+                <span class="work-year">2021</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="impact">
+        <div class="section-header">
+            <span class="section-number">03</span>
+            <div class="section-line"></div>
+        </div>
+        <h2>Good Trouble</h2>
+        <div class="impact-card">
+            <p class="impact-quote">When we discuss becoming John R. Lewis we are talking about upholding the legacy of a man who stood for civil rights and social justice at the core root of equity.</p>
+            <p class="impact-source">— Kadija Ismail, on the school renaming campaign</p>
+        </div>
+    </section>
+
+    <section class="skills">
+        <div class="section-header">
+            <span class="section-number">04</span>
+            <div class="section-line"></div>
+        </div>
+        <h2>Areas of Focus</h2>
+        <div class="skills-grid">
+            <div class="skill-block">
+                <div class="skill-icon">◈</div>
+                <h3 class="skill-title">Artificial Intelligence</h3>
+                <p class="skill-desc">Machine learning, natural language processing, and AI applications for social good.</p>
+            </div>
+            <div class="skill-block">
+                <div class="skill-icon">◇</div>
+                <h3 class="skill-title">Education Technology</h3>
+                <p class="skill-desc">Designing equitable learning systems and analyzing educational policy through data.</p>
+            </div>
+            <div class="skill-block">
+                <div class="skill-icon">○</div>
+                <h3 class="skill-title">Social Impact</h3>
+                <p class="skill-desc">Community organizing, advocacy, and building coalitions for systemic change.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>Let's create <em>impact</em> together</h2>
+        <p>Always interested in conversations about AI, education equity, and meaningful technology.</p>
+        <div class="contact-links">
+            <a href="https://www.linkedin.com/in/kadijaismail/" class="contact-link" target="_blank">LinkedIn</a>
+            <a href="mailto:your.email@stanford.edu" class="contact-link">Email</a>
+            <a href="https://msandepro.stanford.edu/people/kadija-ismail" class="contact-link" target="_blank">Stanford Profile</a>
+        </div>
+    </section>
+
+    <footer>
+        <span>© 2025 Kadija Ismail</span>
+        <span>Designed with intention</span>
+    </footer>
+
+    <script>
+        // Subtle scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section:not(.hero)').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.8s ease-out';
+            observer.observe(section);
+        });
+
+        // Smooth navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
 </html>
