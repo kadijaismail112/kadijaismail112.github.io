@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kadija Ismail — Software Engineer</title>
+    <meta name="description" content="Kadija Ismail is a software engineer and Stanford CS graduate interested in reliable infrastructure, robot learning, and embedded systems.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
@@ -485,6 +486,10 @@
             gap: 4rem;
         }
 
+        .education-card + .education-card {
+            margin-top: 2rem;
+        }
+
         .edu-main h3 {
             font-family: 'Instrument Serif', serif;
             font-size: 2rem;
@@ -825,7 +830,7 @@
 </head>
 <body>
     <nav>
-        <a href="#" class="logo">KI</a>
+        <a href="#top" class="logo">KI</a>
         <div class="nav-links">
             <a href="#about">About</a>
             <a href="#work">Experience</a>
@@ -834,14 +839,14 @@
         </div>
     </nav>
 
-    <section class="hero">
+    <section class="hero" id="top">
         <div class="hero-left">
-            <p class="tagline">Software Engineer · Stanford '25</p>
+            <p class="tagline">Software Engineer · Stanford '25 · UW ECE</p>
             <h1>
                 <span>Kadija</span>
                 <span class="accent">Ismail</span>
             </h1>
-            <p class="hero-intro">Software Development Engineer at Amazon. Stanford CS graduate specializing in AI. I like building things that matter.</p>
+            <p class="hero-intro">Software Development Engineer at Amazon. Stanford CS graduate beginning the UW ECE Professional Master’s program, with interests in reliable infrastructure, embedded systems, and robot learning.</p>
             <div class="scroll-indicator">
                 <span class="scroll-line"></span>
                 <span>Scroll to explore</span>
@@ -858,11 +863,11 @@
             <div class="section-line"></div>
         </div>
         <div class="about-content">
-            <h2>Building <em>software</em> that scales</h2>
+            <h2>Engineering, <em>learning</em>, and real systems</h2>
             <div class="about-text">
-                <p class="about-highlight">I'm a software engineer passionate about building <em>scalable systems</em> and <em>meaningful products</em>.</p>
-                <p>Currently at Amazon in Seattle, I build infrastructure tools used by tens of thousands of engineers. My background spans machine learning research, education technology, and cloud systems that serve real people at scale.</p>
-                <p>I also love teaching—I spent three years helping students learn to code at Stanford, from intro CS to more advanced topics. There's something deeply satisfying about breaking down complex concepts and watching them click.</p>
+                <p class="about-highlight">I'm a software engineer interested in <em>reliable infrastructure</em>, <em>robot learning</em>, and the work required to make technical ideas useful in practice.</p>
+                <p>At Amazon in Seattle, I build tools for region-flexible infrastructure and work on problems in observability and memory efficiency. My earlier projects span embedded bird-call classification, reinforcement learning, computer vision, and education technology.</p>
+                <p>I'm beginning UW's ECE Professional Master's program while continuing to work full time. Longer term, I plan to pursue research in robot learning, particularly uncertainty, robustness, and resource-constrained systems.</p>
                 <div class="stats-row">
                     <div class="stat">
                         <div class="stat-number">30K+</div>
@@ -895,8 +900,8 @@
                     <p class="work-role">Software Development Engineer · Seattle, WA</p>
                     <div class="work-desc">
                         <ul>
-                            <li>Building cloud infrastructure and developer tools at scale</li>
-                            <li>Working on AWS systems that power global services</li>
+                            <li>Building region-flexible cloud infrastructure and migration tooling</li>
+                            <li>Developing observability and memory-efficiency recommendations for production systems</li>
                         </ul>
                     </div>
                 </div>
@@ -981,13 +986,35 @@
                 </div>
             </div>
             <div class="project-card">
+                <span class="project-tag">Reinforcement Learning · Multi-Agent Systems</span>
+                <h3 class="project-title">Cooperation and Ingroup Preference</h3>
+                <p class="project-desc">Studied how ingroup preferences affect cooperation in multi-agent reinforcement learning environments, connecting learned behavior with questions about coordination and group identity.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Reinforcement Learning</span>
+                    <span class="tech-tag">Multi-Agent Systems</span>
+                    <span class="tech-tag">Experimental Analysis</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <span class="project-tag">Generative Audio · Fine-Tuning</span>
+                <h3 class="project-title">MusicGen Vocal Adaptation</h3>
+                <p class="project-desc">Fine-tuned MusicGen on approximately 7.5 hours of vocal audio, using Essentia-based captions to create structured training data for the adaptation process.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">PyTorch</span>
+                    <span class="tech-tag">MusicGen</span>
+                    <span class="tech-tag">Audio ML</span>
+                </div>
+            </div>
+            <div class="project-card">
                 <span class="project-tag">Machine Learning · CS229</span>
                 <h3 class="project-title">FER-MoE: Facial Emotion Recognition</h3>
-                <p class="project-desc">Developed Mixture of Experts model with ResNet-18 architectures for nuanced facial emotion recognition. Used PCA and t-SNE for representation analysis.</p>
+                <p class="project-desc">Developed a Mixture of Experts model with ResNet-18 architectures for facial emotion recognition. Used PCA and t-SNE to analyze learned representations.</p>
                 <div class="project-tech">
                     <span class="tech-tag">PyTorch</span>
                     <span class="tech-tag">ResNet</span>
-                    <span class="tech-tag">MoE</span>
+                    <span class="tech-tag">Mixture of Experts</span>
                     <span class="tech-tag">Computer Vision</span>
                 </div>
             </div>
@@ -1004,7 +1031,7 @@
             <div class="skills-grid">
                 <div>
                     <p class="skill-category">Languages</p>
-                    <p class="skill-list">Python · JavaScript · TypeScript<br>C/C++ · Java · SQL · HTML/CSS</p>
+                    <p class="skill-list">Python · TypeScript · JavaScript · Go<br>C/C++ · Java · SQL · HTML/CSS</p>
                 </div>
                 <div>
                     <p class="skill-category">Frameworks & Tools</p>
@@ -1012,11 +1039,11 @@
                 </div>
                 <div>
                     <p class="skill-category">Cloud & Infrastructure</p>
-                    <p class="skill-list">AWS Lambda · DynamoDB<br>PostgreSQL · Git · CI/CD</p>
+                    <p class="skill-list">AWS CDK · Lambda · DynamoDB<br>PostgreSQL · Git · CI/CD</p>
                 </div>
                 <div>
                     <p class="skill-category">Domains</p>
-                    <p class="skill-list">Machine Learning · NLP<br>Embedded Systems · Full-Stack</p>
+                    <p class="skill-list">Machine Learning · Robot Learning<br>Embedded Systems · Distributed Systems</p>
                 </div>
             </div>
         </div>
@@ -1028,6 +1055,22 @@
             <div class="section-line"></div>
         </div>
         <h2>Education</h2>
+        <div class="education-card">
+            <div class="edu-main">
+                <h3>University of Washington</h3>
+                <p class="edu-degree">Professional Master’s in Electrical & Computer Engineering</p>
+                <p class="edu-minor">Beginning 2026 · Seattle, WA</p>
+            </div>
+            <div class="edu-details">
+                <h4>Interests</h4>
+                <p>Robot Learning · Embedded Systems · Decision-Making Under Uncertainty</p>
+
+                <h4>Recognition</h4>
+                <div class="awards-list">
+                    <span class="award-tag">UW ECE Professional Integration Scholarship</span>
+                </div>
+            </div>
+        </div>
         <div class="education-card">
             <div class="edu-main">
                 <h3>Stanford University</h3>
@@ -1073,7 +1116,7 @@
 
     <section class="contact" id="contact">
         <h2>Let's <em>connect</em></h2>
-        <p>Always happy to chat about software, ML, or interesting problems.</p>
+        <p>Always happy to connect about cloud infrastructure, embedded systems, or robot learning.</p>
         <div class="contact-links">
             <a href="https://www.linkedin.com/in/KadijaIsmail/" class="contact-link" target="_blank">LinkedIn</a>
             <a href="https://github.com/kadijaismail112" class="contact-link" target="_blank">GitHub</a>
@@ -1083,7 +1126,7 @@
     </section>
 
     <footer>
-        <span>© 2025 Kadija Ismail</span>
+        <span>© 2026 Kadija Ismail</span>
         <span class="languages">Fluent in English, Arabic & Somali</span>
         <span>Seattle, WA</span>
     </footer>
